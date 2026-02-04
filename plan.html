@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Imtisangla ❤️</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff8fab,#ffc2d1);
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+}
+
+/* Falling emoji */
+
+.emoji{
+    position:absolute;
+    top:-20px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(120vh);
+        opacity:.95;
+    }
+}
+
+/* Card */
+
+.box{
+    background:white;
+    padding:42px;
+    border-radius:26px;
+    width:340px;
+    text-align:center;
+    box-shadow:0 15px 45px rgba(0,0,0,0.12);
+    z-index:10;
+}
+
+h2{
+    color:#c9184a;
+}
+
+p{
+    color:#555;
+}
+
+.gif{
+    width:150px;
+    border-radius:18px;
+    margin-bottom:14px;
+}
+
+/* Buttons */
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:none;
+    border-radius:14px;
+    background:#ff4d6d;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    background:#ff758f;
+    transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box"></div>
+
+<script>
+
+/* ---------------- EMOJI RAIN ---------------- */
+
+function createRain(emoji){
+
+document.querySelectorAll(".emoji").forEach(e=>e.remove());
+
+for(let i=0;i<35;i++){
+
+let drop=document.createElement("div");
+drop.className="emoji";
+drop.innerHTML=emoji;
+
+drop.style.left=Math.random()*100+"vw";
+drop.style.fontSize=(Math.random()*22+16)+"px";
+drop.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(drop);
+}
+
+}
+
+/* ---------------- FIRST SCREEN ---------------- */
+
+function loadFirstScreen(){
+
+createRain("❤️");
+
+document.getElementById("box").innerHTML=`
+
+<img class="gif"
+src="https://media1.tenor.com/m/KshIPrRS1aAAAAAd/cat-orange-cat.gif">
+
+<h2>Will you be my Valentine? ❤️</h2>
+
+<button onclick="pressYes()">YES ❤️</button>
+<button onclick="pressNo()">NO 😈</button>
+
+`;
+
+}
+
+/* ---------------- YES FLOW ---------------- */
+
+function pressYes(){
+
+createRain("🔥");
+setTimeout(()=>createRain("❤️"),700);
+
+document.getElementById("box").innerHTML=`
+
+<img class="gif"
+src="https://media.tenor.com/mSVpXDtBoXMAAAAi/kitty-dancing.gif">
+
+<h2>I knew you'd say yes 😌❤️</h2>
+
+<p>Now help me plan the perfect Valentine.</p>
+
+<button onclick="showPlanner()">Continue ❤️</button>
+
+`;
+
+}
+
+/* ---------------- PLANNER ---------------- */
+
+function showPlanner(){
+
+createRain("💖");
+
+document.getElementById("box").innerHTML=`
+
+<h2>One important question 🙂</h2>
+
+<p>What would make you happiest?</p>
+
+<button onclick="finalChoice('Flowers 🌹')">Flowers 🌹</button>
+<button onclick="finalChoice('Chocolates 🍫')">Chocolates 🍫</button>
+<button onclick="finalChoice('Both 😌')">Both 😌</button>
+<button onclick="finalChoice('Surprise me ✨')">Surprise me ✨</button>
+
+`;
+
+}
+
+/* ---------------- FINAL SCREEN ---------------- */
+
+function finalChoice(choice){
+
+createRain("❤️");
+
+document.getElementById("box").innerHTML=`
+
+<img class="gif"
+src="https://media.tenor.com/6ob.gif">
+
+<h2>Perfect ❤️</h2>
+
+<p><b>${choice}</b> it is.</p>
+
+<p>Looks like I have a little mission now 🙂</p>
+
+<h3>February 14 is officially ours.</h3>
+
+`;
+
+}
+
+/* ---------------- NO FLOW ---------------- */
+
+function pressNo(){
+
+createRain("💩");
+
+document.getElementById("box").innerHTML=`
+
+<img class="gif"
+src="https://media1.tenor.com/m/1Hq1EY8_MXAAAAAd/m%C3%A8o-troll.gif">
+
+<h2>I'll give you one more chance 😌</h2>
+
+<button onclick="loadFirstScreen()">Press here to go back ❤️</button>
+
+`;
+
+}
+
+/* LOAD FIRST SCREEN */
+loadFirstScreen();
+
+</script>
+
+</body>
+</html>
